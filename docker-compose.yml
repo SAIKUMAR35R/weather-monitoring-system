@@ -1,0 +1,22 @@
+version: '3'
+services:
+  weather-app:
+    build: .
+    container_name: weather-monitor
+    ports:
+      - "5000:5000"
+    environment:
+      - API_KEY=${API_KEY}
+    volumes:
+      - .:/app
+  db:
+    image: postgres:alpine
+    container_name: weather-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: weather
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data
